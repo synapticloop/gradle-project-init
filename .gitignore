@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/gradle,eclipse
+# Created by https://www.gitignore.io/api/gradle,eclipse,
 
 ### Gradle ###
 .gradle
@@ -60,3 +60,6 @@ local.properties
 
 # STS (Spring Tool Suite)
 .springBeans
+
+
+#!! ERROR:  is undefined. Use list command to see defined gitignore types !!#
