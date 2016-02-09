@@ -6,12 +6,16 @@
 {\n}
 {\n}
 
+// list all of the plugins for this project{\n}
 plugins {{{\n}
-	{loop pluginList as plugin}
-		{\t}id '{plugin.key}'{if fn:notNull[plugin.value]} version '{plugin.value}'{endif}{\n}
-	{endloop}
+	{if fn:notNull[pluginList]}
+		{loop pluginList as plugin}
+			{\t}id '{plugin.key}'{if fn:notNull[plugin.value]} version '{plugin.value}'{endif}{\n}
+		{endloop}
+	{endif}
 }{\n}
 {\n}
+// textual information for this project{\n}
 group = '{build.group.value}'{\n}
 archivesBaseName = '{build.archivesBaseName.value}'{\n}
 description = """{build.description.value}"""{\n}
@@ -22,14 +26,16 @@ sourceCompatibility = {build.sourceCompatibility.value}{\n}
 targetCompatibility = {build.targetCompatibility.value}{\n}
 {\n}
 {\n}
-
+// all of the repositories that this peoject will use{\n}
 repositories {{{\n}
-	{loop repositoryList as repository}
-		{\t}{repository.key}(){\n}
-	{endloop}
+	{if fn:notNull[repositoryList]}
+		{loop repositoryList as repository}
+			{\t}{repository.key}(){\n}
+		{endloop}
+	{endif}
 }{\n}
 {\n}
-
+// now for all of the dependencies{\n}
 dependencies {{{\n}
 	{if fn:notNull[dependencyList]}
 		{loop dependencyList as dependency}
@@ -42,7 +48,7 @@ dependencies {{{\n}
 	{endif}
 }{\n}
 {\n}
-
+// we always want to fail on version conflict{\n}
 configurations.all {{{\n}
 {\t}resolutionStrategy {{{\n}
 {\t}{\t}failOnVersionConflict(){\n}
@@ -51,19 +57,6 @@ configurations.all {{{\n}
 {\n}
 
 {if fn:notNull[task]}
-	{if fn:notNull[task.h2zero]}
-		task h2zero << {{{\n}
-		{\t}logging.captureStandardOutput LogLevel.INFO{\n}
-		{\t}ant.taskdef(resource: 'h2zero.properties',{\n}
-		{\t}{\t}{\t}{\t}{\t}{\t}{\t}classpath: configurations.runtime.asPath) {{{\n}
-		{\t}}{\n}
-		{\t}ant.h2zero(inFile: 'src/main/resources/{build.archivesBaseName.value}.h2zero',{\n}
-		{\t}{\t}outDir: '.',{\n}
-		{\t}{\t}verbose: 'false') {{{\n}
-		{\t}}{\n}
-		}{\n}
-		{\n}
-	{endif}
 
 	{if fn:notNull[task.shadowJar]}
 		jar {{{\n}
@@ -91,7 +84,7 @@ configurations.all {{{\n}
 	{endif}
 
 	{if fn:notNull[task.bintray]}
-		def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'{\n}
+		def javaApiUrl = 'http://docs.oracle.com/javase/{build.sourceCompatibility}.0/docs/api/'{\n}
 		def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'{\n}
 		{\n}
 		tasks.withType(Javadoc) {{{\n}
@@ -144,5 +137,20 @@ configurations.all {{{\n}
 		{\t}}{\n}
 		{\n}
 		}{\n}
+		{\n}
+	{endif}
+
+	{if fn:notNull[task.h2zero]}
+		task h2zero << {{{\n}
+		{\t}logging.captureStandardOutput LogLevel.INFO{\n}
+		{\t}ant.taskdef(resource: 'h2zero.properties',{\n}
+		{\t}{\t}{\t}{\t}{\t}{\t}{\t}classpath: configurations.runtime.asPath) {{{\n}
+		{\t}}{\n}
+		{\t}ant.h2zero(inFile: 'src/main/resources/{build.archivesBaseName.value}.h2zero',{\n}
+		{\t}{\t}outDir: '.',{\n}
+		{\t}{\t}verbose: 'false') {{{\n}
+		{\t}}{\n}
+		}{\n}
+		{\n}
 	{endif}
 {endif}
