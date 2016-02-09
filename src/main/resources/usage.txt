@@ -1,0 +1,9 @@
+Usage:
+
+  java -jar gradle-init.jar (-n <name>)|(-u <url>)|(-f <file>)
+
+try:
+
+  java -jar gradle-init.jar -n java
+
+which will then look up the synapticloop github repository

@@ -9,10 +9,10 @@ meta.settings.gradle.template=https://raw.githubusercontent.com/synapticloop/gra
 # meta information
 #
 
-mulitchoice.meta.directories.src/main/java=true
-mulitchoice.meta.directories.src/main/resources=true
-mulitchoice.meta.directories.src/test/java=true
-mulitchoice.meta.directories.src/test/resources=true
+choice.meta.directories.src/main/java=true
+choice.meta.directories.src/main/resources=true
+choice.meta.directories.src/test/java=true
+choice.meta.directories.src/test/resources=true
 
 boolean.plugin.java|=true
 boolean.plugin.eclipse|=true
@@ -33,7 +33,7 @@ string.build.archivesBaseName=gradle-project-init
 string.build.description=gradle project initialiser
 
 string.build.version=v0.0.1
-string.build.publications=Synapticloop
+string.build.publication=Synapticloop
 
 string.build.mainClass=synapticloop.gradle.project.init.Main
 
