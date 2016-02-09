@@ -57,7 +57,7 @@ configurations.all {{{\n}
 		{\t}ant.taskdef(resource: 'h2zero.properties',{\n}
 		{\t}{\t}{\t}{\t}{\t}{\t}{\t}classpath: configurations.runtime.asPath) {{{\n}
 		{\t}}{\n}
-		{\t}ant.h2zero(inFile: 'src/main/resources/{build.archivesBaseName}.h2zero',{\n}
+		{\t}ant.h2zero(inFile: 'src/main/resources/{build.archivesBaseName.value}.h2zero',{\n}
 		{\t}{\t}outDir: '.',{\n}
 		{\t}{\t}verbose: 'false') {{{\n}
 		{\t}}{\n}
@@ -68,7 +68,7 @@ configurations.all {{{\n}
 	{if fn:notNull[task.shadowJar]}
 		jar {{{\n}
 		{\t}manifest {{{\n}
-		{\t}{\t}attributes("Main-Class": "{build.mainClass}"){\n}
+		{\t}{\t}attributes("Main-Class": "{build.mainClass.value}"){\n}
 		{\t}}{\n}
 		}{\n}
 		{\n}
@@ -110,14 +110,14 @@ configurations.all {{{\n}
 		{\n}
 		publishing {{{\n}
 		{\t}publications {{{\n}
-		{\t}{\t}{build.publication}(MavenPublication) {{{\n}
+		{\t}{\t}{build.publication.value}(MavenPublication) {{{\n}
 		{\t}{\t}{\t}from components.java{\n}
 		{\t}{\t}{\t}artifact sourcesJar{\n}
 		{\t}{\t}{\t}artifact javadocJar{\n}
 		{\n}
-		{\t}{\t}{\t}groupId '{build.group}'{\n}
+		{\t}{\t}{\t}groupId '{build.group.value}'{\n}
 		{\n}
-		{\t}{\t}{\t}artifactId '{build.archivesBaseName}'{\n}
+		{\t}{\t}{\t}artifactId '{build.archivesBaseName.value}'{\n}
 		{\n}
 		{\t}{\t}{\t}pom.withXml {{{\n}
 		{\t}{\t}{\t}{\t}configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each {{ dep ->{\n}
@@ -135,13 +135,13 @@ configurations.all {{{\n}
 		{\t}user = System.getenv('BINTRAY_USER'){\n}
 		{\t}key = System.getenv('BINTRAY_PASSWORD'){\n}
 		{\n}
-		{\t}publications = [ '{build.publication}' ]{\n}
+		{\t}publications = [ '{build.publication.value}' ]{\n}
 		{\n}
 		{\t}publish = true{\n}
 		{\n}
 		{\t}pkg {{{\n}
 		{\t}{\t}repo = 'maven'{\n}
-		{\t}{\t}name = '{build.archivesBaseName}'{\n}
+		{\t}{\t}name = '{build.archivesBaseName.value}'{\n}
 		{\t}}{\n}
 		{\n}
 		}{\n}
