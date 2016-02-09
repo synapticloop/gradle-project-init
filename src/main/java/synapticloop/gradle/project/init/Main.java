@@ -18,6 +18,7 @@ import synapticloop.gradle.project.init.bean.KeyValueBean;
 import synapticloop.templar.Parser;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.utils.TemplarContext;
 import synapticloop.util.SimpleLogger;
 import synapticloop.util.SimpleUsage;
 
@@ -61,11 +62,18 @@ public class Main {
 		askBooleanQuestions(questionAndAnswerManager);
 
 		// now we are ready to generate
+		generate(questionAndAnswerManager);
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void generate(QuestionAndAnswerManager questionAndAnswerManager) {
+		TemplarContext templarContext = questionAndAnswerManager.getTemplarContext();
 		Parser parser = null;
+
 		try {
 			parser = new Parser(new String(IOUtils.toByteArray(new URL(questionAndAnswerManager.getMetaBuildDotGradleTemplate()))));
 
-			String rendered = parser.render(questionAndAnswerManager.getTemplarContext());
+			String rendered = parser.render(templarContext);
 
 			File buildDotGradle = new File("./build.gradle");
 			if(buildDotGradle.exists()) {
@@ -77,6 +85,17 @@ public class Main {
 			FileUtils.write(buildDotGradle, rendered);
 		} catch (ParseException | RenderException | IOException ex) {
 			LOGGER.fatal("Could not retrieve or parse the build.gradle template", ex);
+		}
+
+		LOGGER.info("Creating directories...");
+		List<KeyValueBean> createDirectoryList = (List<KeyValueBean>)templarContext.get("createDirectoryList");
+		if(null != createDirectoryList) {
+			for (KeyValueBean keyValueBean : createDirectoryList) {
+				String createDirectory = (String) keyValueBean.getKey();
+				if(new File(createDirectory).mkdirs()) {
+					LOGGER.info("Successfully created directory '" + createDirectory + "'.");
+				}
+			}
 		}
 	}
 
