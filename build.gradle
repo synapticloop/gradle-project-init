@@ -21,13 +21,13 @@ group = 'synapticloop'
 archivesBaseName = 'gradle-project-init'
 description = """gradle project initialiser"""
 
-version = 'v0.0.1'
+version = 'v0.0.2'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 
-// all of the repositories that this peoject will use
+// all of the repositories that this project will use
 repositories {
 	mavenLocal()
 	mavenCentral()
@@ -47,6 +47,7 @@ dependencies {
 	compile 'synapticloop:templar:v1.1.2'
 }
 
+// we always want to fail on version conflict
 configurations.all {
 	resolutionStrategy {
 		failOnVersionConflict()
@@ -57,6 +58,21 @@ jar {
 	manifest {
 		attributes("Main-Class": "synapticloop.gradle.project.init.Main")
 	}
+}
+
+build.finalizedBy(project.tasks.shadowJar)
+
+github {
+	owner = group
+	repo = archivesBaseName
+	if(System.getenv('GITHUB_TOKEN')) {
+		token = System.getenv('GITHUB_TOKEN')
+	}
+	tagName = version
+	name = version
+	assets = [
+		'build/libs/' + archivesBaseName + '-' + version + '-all.jar'
+	]
 }
 
 def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'
@@ -113,17 +129,3 @@ bintray {
 
 }
 
-github {
-	owner = group
-	repo = archivesBaseName
-	if(System.getenv('GITHUB_TOKEN')) {
-		token = System.getenv('GITHUB_TOKEN')
-	}
-	tagName = version
-	name = version
-	assets = [
-		'build/libs/' + archivesBaseName + '-' + version + '-all.jar'
-	]
-}
-
-build.finalizedBy(project.tasks.shadowJar)
