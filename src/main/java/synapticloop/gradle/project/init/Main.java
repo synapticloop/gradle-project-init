@@ -114,6 +114,21 @@ public class Main {
 				}
 			}
 		}
+
+		LOGGER.info("Generating .gitignore");
+		List<KeyValueBean> gitignoreList = (List<KeyValueBean>)templarContext.get("gitignoreList");
+		if(null != gitignoreList) {
+			StringBuilder stringBuilder = new StringBuilder();
+			for (KeyValueBean keyValueBean : gitignoreList) {
+				stringBuilder.append(keyValueBean.getKey());
+				stringBuilder.append(",");
+			}
+			try {
+				FileUtils.write(new File(".gitignore"), IOUtils.toString(new URL("https://www.gitignore.io/api/" + stringBuilder.toString())));
+			} catch (IOException ex) {
+				LOGGER.fatal("Could not generate the .gitignore file", ex);
+			}
+		}
 	}
 
 	private static void askStringQuestions(QuestionAndAnswerManager questionAndAnswerManager) {

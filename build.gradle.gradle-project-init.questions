@@ -13,6 +13,12 @@ boolean.createDirectory.src/main/resources=true
 boolean.createDirectory.src/test/java=true
 boolean.createDirectory.src/test/resources=true
 
+#
+# meta information for https://www.gitignore.io/
+#
+boolean.gitignore.gradle=true
+boolean.gitignore.eclipse=true
+
 boolean.plugin.java|=true
 boolean.plugin.eclipse|=true
 boolean.plugin.maven|=true
@@ -31,7 +37,7 @@ string.build.group=synapticloop
 string.build.archivesBaseName=gradle-project-init
 string.build.description=gradle project initialiser
 
-string.build.version=v1.0.0
+string.build.version=v1.0.1
 string.build.publication=Synapticloop
 
 string.build.mainClass=synapticloop.gradle.project.init.Main

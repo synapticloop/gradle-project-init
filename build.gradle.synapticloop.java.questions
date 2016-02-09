@@ -14,6 +14,12 @@ boolean.createDirectory.src/main/resources=true
 boolean.createDirectory.src/test/java=true
 boolean.createDirectory.src/test/resources=true
 
+#
+# meta information for https://www.gitignore.io/
+#
+boolean.gitignore.gradle=true
+boolean.gitignore.eclipse=true
+
 boolean.plugin.java|=true
 boolean.plugin.eclipse|=true
 boolean.plugin.maven|=true
@@ -38,7 +44,7 @@ boolean.dependency.org.slf4j:slf4j-api:1.7.13=
 boolean.dependency.org.apache.logging.log4j:log4j-slf4j-impl:2.4.1=
 boolean.dependency.org.apache.logging.log4j:log4j-core:2.4.1=
 
-boolean.testDependency.junit:junit:4.7=true
+boolean.testDependency.junit:junit:4.12=true
 
 
 string.build.group=synapticloop

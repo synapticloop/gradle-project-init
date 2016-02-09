@@ -6,13 +6,22 @@ meta.build.gradle.template=https://raw.githubusercontent.com/synapticloop/gradle
 meta.settings.gradle.template=https://raw.githubusercontent.com/synapticloop/gradle-project-init/master/settings.gradle.templar
 
 #
-# meta information
+# meta information for directory creation
 #
 
 boolean.createDirectory.src/main/java=true
 boolean.createDirectory.src/main/resources=true
 boolean.createDirectory.src/test/java=true
 boolean.createDirectory.src/test/resources=true
+
+#
+# meta information for https://www.gitignore.io/
+#
+boolean.gitignore.gradle=true
+boolean.gitignore.eclipse=false
+boolean.gitignore.intellij=false
+boolean.gitignore.android=false
+
 
 boolean.plugin.java|=true
 boolean.plugin.eclipse|=true
@@ -27,7 +36,7 @@ boolean.dependency.org.slf4j:slf4j-api:1.7.13=true
 boolean.dependency.org.apache.logging.log4j:log4j-slf4j-impl:2.4.1=true
 boolean.dependency.org.apache.logging.log4j:log4j-core:2.4.1=true
 
-boolean.testDependency.junit:junit:4.7=true
+boolean.testDependency.junit:junit:4.12=true
 
 
 string.build.group=myGroup
