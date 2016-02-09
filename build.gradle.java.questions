@@ -47,6 +47,8 @@ boolean.repository.mavenCentral=true
 boolean.repository.jcenter=true
 
 boolean.task.shadowJar=false
+boolean.task.bintray=true
+boolean.task.github=true
 boolean.task.cobertura=false
 
 
