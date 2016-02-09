@@ -45,6 +45,8 @@ boolean.dependency.org.apache.logging.log4j:log4j-slf4j-impl:2.4.1=
 boolean.dependency.org.apache.logging.log4j:log4j-core:2.4.1=
 
 boolean.testDependency.junit:junit:4.12=true
+boolean.testDependency.org.apache.logging.log4j:log4j-slf4j-impl:2.4.1=false
+boolean.testDependency.org.apache.logging.log4j:log4j-core:2.4.1=false
 
 
 string.build.group=synapticloop
