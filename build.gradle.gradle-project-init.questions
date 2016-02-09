@@ -3,7 +3,7 @@
 # must be present in the file
 #
 meta.build.gradle.template=https://raw.githubusercontent.com/synapticloop/gradle-init/master/build.gradle.templar
-meta.gradle.settings.template=https://raw.githubusercontent.com/synapticloop/gradle-init/master/settings.gradle.templar
+meta.settings.gradle.template=https://raw.githubusercontent.com/synapticloop/gradle-init/master/settings.gradle.templar
 
 #
 # meta information
