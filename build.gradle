@@ -21,7 +21,7 @@ group = 'synapticloop'
 archivesBaseName = 'gradle-project-init'
 description = """gradle project initialiser"""
 
-version = 'v0.0.4'
+version = 'v0.0.5'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7

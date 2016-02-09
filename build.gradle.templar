@@ -45,6 +45,16 @@ dependencies {{{\n}
 		{loop dependencyList as dependency}
 			{\t}compile '{dependency.key}'{\n}
 		{endloop}
+	{\n}
+	{endif}
+	{if fn:notNull[testDependencyList]}
+		{loop testDependencyList as dependency}
+			{\t}testRuntime '{dependency.key}'{\n}
+		{endloop}
+	{\n}
+		{loop testDependencyList as dependency}
+			{\t}testCompile '{dependency.key}'{\n}
+		{endloop}
 	{endif}
 }{\n}
 {\n}
@@ -57,6 +67,19 @@ configurations.all {{{\n}
 {\n}
 
 {if fn:notNull[task]}
+
+	{if fn:notNull[task.cobertura]}
+		cobertura {{{\n}
+		{\t}coverageFormats = [ 'html', 'xml']{\n}
+		}{\n}
+		{\n}
+		test {{{\n}
+		{\t}include '**/*Test.class' {\n}
+		{\t}maxParallelForks = 1{\n}
+		{\t}forkEvery = 50 {\n}
+		}{\n}
+		{\n}
+	{endif}
 
 	{if fn:notNull[task.shadowJar]}
 		jar {{{\n}
