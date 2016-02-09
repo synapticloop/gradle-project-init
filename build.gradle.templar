@@ -89,7 +89,7 @@ configurations.all {{{\n}
 		}{\n}
 		{\n}
 	{endif}
-
+{dumpcontext}
 	{if fn:notNull[task.bintray]}
 		def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'{\n}
 		def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'{\n}
