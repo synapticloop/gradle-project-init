@@ -116,7 +116,6 @@ configurations.all {{{\n}
 		{\t}{\t}{\t}artifact javadocJar{\n}
 		{\n}
 		{\t}{\t}{\t}groupId '{build.group.value}'{\n}
-		{\n}
 		{\t}{\t}{\t}artifactId '{build.archivesBaseName.value}'{\n}
 		{\n}
 		{\t}{\t}{\t}pom.withXml {{{\n}
