@@ -2,7 +2,8 @@
 # This is the template that is used to render the build.gradle file and this 
 # must be present in the file
 #
-meta.build.gradle.template=https://raw.githubusercontent.com/synapticloop/gradle-init/master/build.gradle.java.templar
+meta.build.gradle.template=https://raw.githubusercontent.com/synapticloop/gradle-project-init/master/build.gradle.templar
+meta.settings.gradle.template=https://raw.githubusercontent.com/synapticloop/gradle-project-init/master/settings.gradle.templar
 
 #
 # meta information
