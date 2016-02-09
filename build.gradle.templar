@@ -110,8 +110,8 @@ configurations.all {{{\n}
 		{\t}{\t}{\t}artifact sourcesJar{\n}
 		{\t}{\t}{\t}artifact javadocJar{\n}
 		{\n}
-		{\t}{\t}{\t}groupId '{build.group.value}'{\n}
-		{\t}{\t}{\t}artifactId '{build.archivesBaseName.value}'{\n}
+		{\t}{\t}{\t}groupId group{\n}
+		{\t}{\t}{\t}artifactId archivesBaseName{\n}
 		{\n}
 		{\t}{\t}{\t}pom.withXml {{{\n}
 		{\t}{\t}{\t}{\t}configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each {{ dep ->{\n}
@@ -135,7 +135,7 @@ configurations.all {{{\n}
 		{\n}
 		{\t}pkg {{{\n}
 		{\t}{\t}repo = 'maven'{\n}
-		{\t}{\t}name = '{build.archivesBaseName.value}'{\n}
+		{\t}{\t}name = archivesBaseName{\n}
 		{\t}}{\n}
 		{\n}
 		}{\n}

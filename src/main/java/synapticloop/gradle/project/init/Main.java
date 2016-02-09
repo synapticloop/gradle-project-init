@@ -87,6 +87,23 @@ public class Main {
 			LOGGER.fatal("Could not retrieve or parse the build.gradle template", ex);
 		}
 
+		try {
+			parser = new Parser(new String(IOUtils.toByteArray(new URL(questionAndAnswerManager.getMetaSettingsDotGradleTemplate()))));
+
+			String rendered = parser.render(templarContext);
+
+			File settingsDotGradle = new File("./settings.gradle");
+			if(settingsDotGradle.exists()) {
+				long currentTimeMillis = System.currentTimeMillis();
+				LOGGER.warn("settings.gradle file already exists, moving it out of the way to settings.gradle."+ currentTimeMillis + ".bak");
+				settingsDotGradle.renameTo(new File("settings.gradle." + currentTimeMillis + ".bak"));
+			}
+			settingsDotGradle = new File("./settings.gradle");
+			FileUtils.write(settingsDotGradle, rendered);
+		} catch (ParseException | RenderException | IOException ex) {
+			LOGGER.fatal("Could not retrieve or parse the settings.gradle template", ex);
+		}
+
 		LOGGER.info("Creating directories...");
 		List<KeyValueBean> createDirectoryList = (List<KeyValueBean>)templarContext.get("createDirectoryList");
 		if(null != createDirectoryList) {
