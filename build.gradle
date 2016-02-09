@@ -99,8 +99,8 @@ publishing {
 			artifact sourcesJar
 			artifact javadocJar
 
-			groupId 'synapticloop'
-			artifactId 'gradle-project-init'
+			groupId group
+			artifactId archivesBaseName
 
 			pom.withXml {
 				configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
@@ -124,7 +124,7 @@ bintray {
 
 	pkg {
 		repo = 'maven'
-		name = 'gradle-project-init'
+		name = archivesBaseName
 	}
 
 }
