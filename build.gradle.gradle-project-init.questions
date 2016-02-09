@@ -8,7 +8,6 @@ meta.settings.gradle.template=https://raw.githubusercontent.com/synapticloop/gra
 #
 # meta information
 #
-
 boolean.createDirectory.src/main/java=true
 boolean.createDirectory.src/main/resources=true
 boolean.createDirectory.src/test/java=true
@@ -32,7 +31,7 @@ string.build.group=synapticloop
 string.build.archivesBaseName=gradle-project-init
 string.build.description=gradle project initialiser
 
-string.build.version=v0.0.1
+string.build.version=v0.0.2
 string.build.publication=Synapticloop
 
 string.build.mainClass=synapticloop.gradle.project.init.Main

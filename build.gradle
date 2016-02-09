@@ -47,7 +47,6 @@ dependencies {
 	compile 'synapticloop:templar:v1.1.2'
 }
 
-// we always want to fail on version conflict
 configurations.all {
 	resolutionStrategy {
 		failOnVersionConflict()
@@ -60,20 +59,7 @@ jar {
 	}
 }
 
-build.finalizedBy(project.tasks.shadowJar)
-
-github {
-	owner = group
-	repo = archivesBaseName
-	token = System.getenv('GITHUB_TOKEN')
-	tagName = version
-	name = version
-	assets = [
-		'build/libs/' + archivesBaseName + '-' + version + '-all.jar'
-	]
-}
-
-def javaApiUrl = 'http://docs.oracle.com/javase/KeyValueBean [key=sourceCompatibility, value=1.7, defaultValue=1.7].0/docs/api/'
+def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'
 def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'
 
 tasks.withType(Javadoc) {
@@ -127,3 +113,17 @@ bintray {
 
 }
 
+github {
+	owner = group
+	repo = archivesBaseName
+	if(System.getenv('GITHUB_TOKEN')) {
+		token = System.getenv('GITHUB_TOKEN')
+	}
+	tagName = version
+	name = version
+	assets = [
+		'build/libs/' + archivesBaseName + '-' + version + '-all.jar'
+	]
+}
+
+build.finalizedBy(project.tasks.shadowJar)

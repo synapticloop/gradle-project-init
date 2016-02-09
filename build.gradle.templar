@@ -26,7 +26,7 @@ sourceCompatibility = {build.sourceCompatibility.value}{\n}
 targetCompatibility = {build.targetCompatibility.value}{\n}
 {\n}
 {\n}
-// all of the repositories that this peoject will use{\n}
+// all of the repositories that this project will use{\n}
 repositories {{{\n}
 	{if fn:notNull[repositoryList]}
 		{loop repositoryList as repository}
@@ -73,7 +73,9 @@ configurations.all {{{\n}
 		github {{{\n}
 		{\t}owner = group{\n}
 		{\t}repo = archivesBaseName{\n}
-		{\t}token = System.getenv('GITHUB_TOKEN'){\n}
+		{\t}if(System.getenv('GITHUB_TOKEN')) {{{\n}
+		{\t}{\t}token = System.getenv('GITHUB_TOKEN'){\n}
+		{\t}}{\n}
 		{\t}tagName = version{\n}
 		{\t}name = version{\n}
 		{\t}assets = [{\n}
@@ -84,7 +86,7 @@ configurations.all {{{\n}
 	{endif}
 
 	{if fn:notNull[task.bintray]}
-		def javaApiUrl = 'http://docs.oracle.com/javase/{build.sourceCompatibility}.0/docs/api/'{\n}
+		def javaApiUrl = 'http://docs.oracle.com/javase/{build.sourceCompatibility.value}.0/docs/api/'{\n}
 		def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'{\n}
 		{\n}
 		tasks.withType(Javadoc) {{{\n}
