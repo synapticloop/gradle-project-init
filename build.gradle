@@ -45,6 +45,7 @@ dependencies {
 	compile 'synapticloop:simplelogger:v1.0.5'
 	compile 'synapticloop:simpleusage:v1.0.0'
 	compile 'synapticloop:templar:v1.1.2'
+
 }
 
 // we always want to fail on version conflict
