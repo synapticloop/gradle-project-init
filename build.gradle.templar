@@ -89,7 +89,7 @@ configurations.all {{{\n}
 		}{\n}
 		{\n}
 	{endif}
-{dumpcontext}
+
 	{if fn:notNull[task.bintray]}
 		def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'{\n}
 		def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'{\n}
@@ -110,6 +110,7 @@ configurations.all {{{\n}
 		{\n}
 		publishing {{{\n}
 		{\t}publications {{{\n}
+		{\t}{\t}{build.publication.value}(MavenPublication) {{{\n}
 		{\t}{\t}{\t}from components.java{\n}
 		{\t}{\t}{\t}artifact sourcesJar{\n}
 		{\t}{\t}{\t}artifact javadocJar{\n}
@@ -134,6 +135,7 @@ configurations.all {{{\n}
 		{\t}user = System.getenv('BINTRAY_USER'){\n}
 		{\t}key = System.getenv('BINTRAY_PASSWORD'){\n}
 		{\n}
+		{\t}publications = [ '{build.publication.value}' ]{\n}
 		{\n}
 		{\t}publish = true{\n}
 		{\n}
