@@ -1,0 +1,59 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+	id 'com.github.johnrengelman.shadow' version '1.2.2'
+	id 'co.riiid.gradle' version '0.3.1'
+}
+
+group = 'synapticloop'
+archivesBaseName = 'gradle-init'
+description = """gradle initialiser"""
+
+version = 'v0.0.1'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	jcenter()
+}
+
+dependencies {
+	runtime 'commons-io:commons-io:2.4'
+	runtime 'synapticloop:simplelogger:v1.0.5'
+	runtime 'synapticloop:simpleusage:v1.0.0'
+	runtime 'synapticloop:templar:v1.1.2'
+
+	compile 'commons-io:commons-io:2.4'
+	compile 'synapticloop:simplelogger:v1.0.5'
+	compile 'synapticloop:simpleusage:v1.0.0'
+	compile 'synapticloop:templar:v1.1.2'
+}
+configurations.all {
+	resolutionStrategy {
+		failOnVersionConflict()
+	}
+}
+
+jar {
+	manifest {
+		attributes("Main-Class": "synapticloop.gradle.project.init.Main")
+	}
+}
+
+github {
+	owner = group
+	repo = archivesBaseName
+	token = System.getenv('GITHUB_TOKEN')
+	tagName = version
+	name = version
+	assets = [
+		'build/libs/' + archivesBaseName + '-' + version + '-all.jar'
+	]
+}
+
+build.finalizedBy(project.tasks.shadowJar)
