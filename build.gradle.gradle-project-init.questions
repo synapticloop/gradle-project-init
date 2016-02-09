@@ -9,51 +9,39 @@ meta.gradle.settings.template=https://raw.githubusercontent.com/synapticloop/gra
 # meta information
 #
 
-mulitchoice.meta.directories=src/main/java
-mulitchoice.meta.directories=src/main/resources
-mulitchoice.meta.directories=src/test/java
-mulitchoice.meta.directories=src/test/resources
+mulitchoice.meta.directories.src/main/java=true
+mulitchoice.meta.directories.src/main/resources=true
+mulitchoice.meta.directories.src/test/java=true
+mulitchoice.meta.directories.src/test/resources=true
 
 boolean.plugin.java|=true
 boolean.plugin.eclipse|=true
-boolean.plugin.co.riiid.gradle|0.3.1=false
-boolean.plugin.net.saliman.cobertura|2.2.6=false
-boolean.plugin.org.sonarqube|1.0=false
-boolean.plugin.com.jfrog.bintray|1.4=false
 boolean.plugin.maven|=true
 boolean.plugin.maven-publish|=true
-boolean.plugin.com.github.johnrengelman.shadow|1.2.2=false
+boolean.plugin.co.riiid.gradle|0.3.1=true
+boolean.plugin.com.jfrog.bintray|1.4=true
+boolean.plugin.com.github.johnrengelman.shadow|1.2.2=true
 
-boolean.dependency.org.json:json:20090211=
-boolean.dependency.org.apache.httpcomponents:httpclient:4.3.4=
-boolean.dependency.org.seleniumhq.selenium:selenium-java:2.48.2=
-boolean.dependency.commons-io:commons-io:2.4=
-boolean.dependency.ru.yandex.qatools.ashot:ashot:1.5.2=
-boolean.dependency.synapticloop:h2zero:v1.0.7=
-boolean.dependency.synapticloop:simplelogger:v1.0.5=
-boolean.dependency.synapticloop:simpleusage:v1.0.0=
-boolean.dependency.mysql:mysql-connector-java:5.1.38=
-boolean.dependency.org.ocpsoft.prettytime:prettytime:4.0.1.Final=
-boolean.dependency.org.slf4j:slf4j-api:1.7.13=
-boolean.dependency.org.apache.logging.log4j:log4j-slf4j-impl:2.4.1=
-boolean.dependency.org.apache.logging.log4j:log4j-core:2.4.1=
+boolean.dependency.commons-io:commons-io:2.4=true
+boolean.dependency.synapticloop:simplelogger:v1.0.5=true
+boolean.dependency.synapticloop:simpleusage:v1.0.0=true
+boolean.dependency.synapticloop:templar:v1.1.2=true
 
 
-string.build.group=myGroup
-string.build.archivesBaseName=myArchivesBaseName
-string.build.description=myDescription
+string.build.group=synapticloop
+string.build.archivesBaseName=gradle-project-init
+string.build.description=gradle project initialiser
 
 string.build.version=v0.0.1
-string.build.publications=myPublications
+string.build.publications=Synaptiloop
 
-choice.build.sourceCompatibility=1.6,1.7,[1.8]
-choice.build.targetCompatibility=1.6,1.7,[1.8]
+choice.build.sourceCompatibility=1.6,[1.7],1.8
+choice.build.targetCompatibility=1.6,[1.7],1.8
 
 boolean.repository.mavenLocal=true
 boolean.repository.mavenCentral=true
 boolean.repository.jcenter=true
 
-boolean.task.h2zero=false
-boolean.task.shadowJar=false
+boolean.task.shadowJar=true
 
 
