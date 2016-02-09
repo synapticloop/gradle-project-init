@@ -66,86 +66,84 @@ configurations.all {{{\n}
 	{endif}
 
 	{if fn:notNull[task.shadowJar]}
-	jar {{{\n}
-	{\t}manifest {{{\n}
-	{\t}{\t}attributes("Main-Class": "synapticloop.cartoonr.Main"){\n}
-	{\t}}{\n}
-	}{\n}
-	{\n}
-	build.finalizedBy(project.tasks.shadowJar){\n}
-	{\n}
-{endif}
+		jar {{{\n}
+		{\t}manifest {{{\n}
+		{\t}{\t}attributes("Main-Class": "{build.mainClass}"){\n}
+		{\t}}{\n}
+		}{\n}
+		{\n}
+		build.finalizedBy(project.tasks.shadowJar){\n}
+		{\n}
+	{endif}
 
-{endif}
+	{if fn:notNull[task.github]}
+		github {{{\n}
+		{\t}owner = group{\n}
+		{\t}repo = archivesBaseName{\n}
+		{\t}token = System.getenv('GITHUB_TOKEN'){\n}
+		{\t}tagName = version{\n}
+		{\t}name = version{\n}
+		{\t}assets = [{\n}
+		{\t}{\t}'build/libs/' + archivesBaseName + '-' + version + '-all.jar'{\n}
+		{\t}]{\n}
+		}{\n}
+		{\n}
+	{endif}
 
-{if task.github}
-	github {{{\n}
-	{\t}owner = group{\n}
-	{\t}repo = archivesBaseName{\n}
-	{\t}token = System.getenv('GITHUB_TOKEN'){\n}
-	{\t}tagName = version{\n}
-	{\t}name = version{\n}
-	{\t}assets = [{\n}
-	{\t}{\t}'build/libs/' + archivesBaseName + '-' + version + '-all.jar'{\n}
-	{\t}]{\n}
-	}{\n}
-	{\n}
+	{if fn:notNull[task.bintray]}
+		def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'{\n}
+		def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'{\n}
+		{\n}
+		tasks.withType(Javadoc) {{{\n}
+		{\t}options.links(javaApiUrl, groovyApiUrl){\n}
+		}{\n}
+		{\n}
+		task javadocJar(type: Jar, dependsOn: javadoc) {{{\n}
+		{\t}classifier = 'javadoc'{\n}
+		{\t}from 'build/docs/javadoc'{\n}
+		}{\n}
+		{\n}
+		task sourcesJar(type: Jar) {{{\n}
+		{\t}from sourceSets.main.allSource{\n}
+		{\t}classifier = 'sources'{\n}
+		}{\n}
+		{\n}
+		publishing {{{\n}
+		{\t}publications {{{\n}
+		{\t}{\t}{build.publication}(MavenPublication) {{{\n}
+		{\t}{\t}{\t}from components.java{\n}
+		{\t}{\t}{\t}artifact sourcesJar{\n}
+		{\t}{\t}{\t}artifact javadocJar{\n}
+		{\n}
+		{\t}{\t}{\t}groupId '{build.group}'{\n}
+		{\n}
+		{\t}{\t}{\t}artifactId '{build.archivesBaseName}'{\n}
+		{\n}
+		{\t}{\t}{\t}pom.withXml {{{\n}
+		{\t}{\t}{\t}{\t}configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each {{ dep ->{\n}
+		{\t}{\t}{\t}{\t}{\t}asNode().dependencies[0].dependency.find {{{\n}
+		{\t}{\t}{\t}{\t}{\t}{\t}it.artifactId[0].text() == dep.moduleName &&{\n}
+		{\t}{\t}{\t}{\t}{\t}{\t}{\t}{\t}it.groupId[0].text() == dep.moduleGroup{\n}
+		{\t}{\t}{\t}{\t}{\t}}.scope[0].value = 'compile'{\n}
+		{\t}{\t}{\t}{\t}}{\n}
+		{\t}{\t}{\t}}{\n}
+		{\t}{\t}}{\n}
+		{\t}}{\n}
+		}{\n}
+		{\n}
+		bintray {{{\n}
+		{\t}user = System.getenv('BINTRAY_USER'){\n}
+		{\t}key = System.getenv('BINTRAY_PASSWORD'){\n}
+		{\n}
+		{\t}publications = [ '{build.publication}' ]{\n}
+		{\n}
+		{\t}publish = true{\n}
+		{\n}
+		{\t}pkg {{{\n}
+		{\t}{\t}repo = 'maven'{\n}
+		{\t}{\t}name = '{build.archivesBaseName}'{\n}
+		{\t}}{\n}
+		{\n}
+		}{\n}
+	{endif}
 {endif}
-
-{if task.bintray}
-	def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'{\n}
-	def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'{\n}
-	{\n}
-	tasks.withType(Javadoc) {{{\n}
-	{\t}options.links(javaApiUrl, groovyApiUrl){\n}
-	}{\n}
-	{\n}
-	task javadocJar(type: Jar, dependsOn: javadoc) {{{\n}
-	{\t}classifier = 'javadoc'{\n}
-	{\t}from 'build/docs/javadoc'{\n}
-	}{\n}
-	{\n}
-	task sourcesJar(type: Jar) {{{\n}
-	{\t}from sourceSets.main.allSource{\n}
-	{\t}classifier = 'sources'{\n}
-	}{\n}
-	{\n}
-	publishing {{{\n}
-	{\t}publications {{{\n}
-	{\t}{\t}{build.publication}(MavenPublication) {{{\n}
-	{\t}{\t}{\t}from components.java{\n}
-	{\t}{\t}{\t}artifact sourcesJar{\n}
-	{\t}{\t}{\t}artifact javadocJar{\n}
-	{\n}
-	{\t}{\t}{\t}groupId '{build.group}'{\n}
-	{\n}
-	{\t}{\t}{\t}artifactId '{build.archivesBaseName}'{\n}
-	{\n}
-	{\t}{\t}{\t}pom.withXml {{{\n}
-	{\t}{\t}{\t}{\t}configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each {{ dep ->{\n}
-	{\t}{\t}{\t}{\t}{\t}asNode().dependencies[0].dependency.find {{{\n}
-	{\t}{\t}{\t}{\t}{\t}{\t}it.artifactId[0].text() == dep.moduleName &&{\n}
-	{\t}{\t}{\t}{\t}{\t}{\t}{\t}{\t}it.groupId[0].text() == dep.moduleGroup{\n}
-	{\t}{\t}{\t}{\t}{\t}}.scope[0].value = 'compile'{\n}
-	{\t}{\t}{\t}{\t}}{\n}
-	{\t}{\t}{\t}}{\n}
-	{\t}{\t}}{\n}
-	{\t}}{\n}
-	}{\n}
-	{\n}
-	bintray {{{\n}
-	{\t}user = System.getenv('BINTRAY_USER'){\n}
-	{\t}key = System.getenv('BINTRAY_PASSWORD'){\n}
-	{\n}
-	{\t}publications = [ '{build.publication}' ]{\n}
-	{\n}
-	{\t}publish = true{\n}
-	{\n}
-	{\t}pkg {{{\n}
-	{\t}{\t}repo = 'maven'{\n}
-	{\t}{\t}name = '{build.archivesBaseName}'{\n}
-	{\t}}{\n}
-	{\n}
-	}{\n}
-{endif}
-pre}

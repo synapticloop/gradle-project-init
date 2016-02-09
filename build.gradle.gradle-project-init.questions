@@ -35,7 +35,7 @@ string.build.description=gradle project initialiser
 string.build.version=v0.0.1
 string.build.publications=Synapticloop
 
-string.build.main-class=your.main.class.here
+string.build.mainClass=synapticloop.gradle.project.init.Main
 
 choice.build.sourceCompatibility=1.6,[1.7],1.8
 choice.build.targetCompatibility=1.6,[1.7],1.8
