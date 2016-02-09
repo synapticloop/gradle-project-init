@@ -5,6 +5,7 @@
  */
 
 
+// list all of the plugins for this project
 plugins {
 	id 'java'
 	id 'eclipse'
@@ -15,6 +16,7 @@ plugins {
 	id 'com.github.johnrengelman.shadow' version '1.2.2'
 }
 
+// textual information for this project
 group = 'synapticloop'
 archivesBaseName = 'gradle-project-init'
 description = """gradle project initialiser"""
@@ -25,12 +27,14 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 
+// all of the repositories that this peoject will use
 repositories {
 	mavenLocal()
 	mavenCentral()
 	jcenter()
 }
 
+// now for all of the dependencies
 dependencies {
 	runtime 'commons-io:commons-io:2.4'
 	runtime 'synapticloop:simplelogger:v1.0.5'
@@ -43,6 +47,7 @@ dependencies {
 	compile 'synapticloop:templar:v1.1.2'
 }
 
+// we always want to fail on version conflict
 configurations.all {
 	resolutionStrategy {
 		failOnVersionConflict()
@@ -68,7 +73,7 @@ github {
 	]
 }
 
-def javaApiUrl = 'http://docs.oracle.com/javase/1.7.0/docs/api/'
+def javaApiUrl = 'http://docs.oracle.com/javase/KeyValueBean [key=sourceCompatibility, value=1.7, defaultValue=1.7].0/docs/api/'
 def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'
 
 tasks.withType(Javadoc) {
@@ -93,7 +98,6 @@ publishing {
 			artifact javadocJar
 
 			groupId 'synapticloop'
-
 			artifactId 'gradle-project-init'
 
 			pom.withXml {
@@ -122,3 +126,4 @@ bintray {
 	}
 
 }
+
