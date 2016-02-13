@@ -37,7 +37,7 @@ string.build.group=synapticloop
 string.build.archivesBaseName=gradle-project-init
 string.build.description=gradle project initialiser
 
-string.build.version=v1.0.3
+string.build.version=v1.0.4
 string.build.publication=Synapticloop
 
 string.build.mainClass=synapticloop.gradle.project.init.Main

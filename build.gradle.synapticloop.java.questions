@@ -33,6 +33,7 @@ boolean.dependency.synapticloop:h2zero:v1.0.7=
 boolean.dependency.synapticloop:simplelogger:v1.0.5=
 boolean.dependency.synapticloop:simpleusage:v1.0.0=
 boolean.dependency.synapticloop:templar:v1.1.3=
+boolean.dependency.org.jsoup:jsoup:1.8.3=
 boolean.dependency.org.json:json:20090211=
 boolean.dependency.org.quartz-scheduler:quartz:2.2.2=
 boolean.dependency.org.apache.httpcomponents:httpclient:4.3.4=
